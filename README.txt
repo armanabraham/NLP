@@ -1,2 +1,1 @@
 The goal is to perform natural language analysis of Benjamin Franklin's Autobiography. Eventually, I would like to turn this into a Shiny app. 
-I don't know exactly what I do want to achieve through this analysis, but I will play by ear and learn along the way. 
