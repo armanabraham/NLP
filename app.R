@@ -10,25 +10,37 @@ ui <- dashboardPage(
   )),
   dashboardBody(tabItems(tabItem(
     tabName = "showText",
+    fluidRow(valueBoxOutput("totalSentencesValueBox"),
+             valueBoxOutput("totalWordsValueBox"),
+             valueBoxOutput("totalCharactersValueBox")
+    ),
     fluidRow(column(12,
                     #box(plotOutput("showTextBox")),
                     box(
+                      title="Autobiography of Benjamin Franklin",
                       width = "100%",
-                      wellPanel(textOutput("bookText"), style = "overflow-y:scroll; max-height: 500px")
-                    )
-                    #width=100%
+                      solidHeader = TRUE, 
+                      status="primary",
+                      #wellPanel(textOutput("bookText"), style = "overflow-y:scroll; max-height: 500px")
+                      pre(textOutput("bookText"))
+                      # tags$div(class="header", checked=NA,
+                      #          tags$style("overflow-y:scroll; max-height: 500px"),
+                      #          tags$p(textOutput("bookText")),
+                      #          tags$a(href="shiny.rstudio.com/tutorial", "Click Here!")
+                    #)
                     #box(textOutput("showText"), height=300, width="100%")
-                    #includeText("Ben_Franklin_Autobiography_full_noTOC_noIntro.txt")))))
+                    #pre(includeText("Ben_Franklin_Autobiography_full_noTOC_noIntro.txt"))
     )))
-  )))
+  ))))
 
   #TODO:
-  # Make textbox scrollable - DONE 
+  # Make wellPanel scrollable - DONE 
   # Increase width of the box - DONE
-  # 
+  # Format text such that carret returns are properly shown
+  # Make textBox scrollable - 
   
   
-  # Define server logic required to draw a histogram
+  # Define server logic requimaroon to draw a histogram
   server <- shinyServer(function(input, output) {
     output$bookText <- renderText({
       bfaRawText <-
@@ -36,23 +48,37 @@ ui <- dashboardPage(
       # The free version t1.micro instance has 1GB RAM limit. To avoid problems with memory
       # allocation when runnign the NLP, we can limit the analysis
       # to first 100 lines.
-      bfaRawText100 <- bfaRawText[1:50]
+      bfaRawText100 <- bfaRawText[1:100]
+      htmltools:::paste8(bfaRawText100, collapse="\r\n")
+      #pre(bfaRawText100)
       #bio <- as.String(bfaRawText790)
       #bio <- paste(bio, collapse = " ")
       #return(bio)
     })
     
-    output$showTextBox <- renderPlot({
-      # generate bins based on input$bins from ui.R
-      x    <- faithful[, 2]
-      bins <- seq(min(x), max(x), length.out = 20 + 1)
-      
-      # draw the histogram with the specified number of bins
-      hist(x,
-           breaks = bins,
-           col = 'darkgray',
-           border = 'white')
+    output$totalSentencesValueBox <- renderValueBox({
+      valueBox("100", "Number of Sentences", icon=icon("th-list"), color="light-blue")
     })
+
+    output$totalWordsValueBox <- renderValueBox({
+      valueBox("300", "Number of Words", icon=icon("th-list"), color="light-blue")
+    })
+    
+    output$totalCharactersValueBox <- renderValueBox({
+      valueBox("500", "Number of Characters", icon=icon("th-list"), color="light-blue")
+    })
+    
+    # output$showTextBox <- renderPlot({
+    #   # generate bins based on input$bins from ui.R
+    #   x    <- faithful[, 2]
+    #   bins <- seq(min(x), max(x), length.out = 20 + 1)
+    #   
+    #   # draw the histogram with the specified number of bins
+    #   hist(x,
+    #        breaks = bins,
+    #        col = 'darkgray',
+    #        border = 'white')
+    # })
   })
   
   # Run the application
