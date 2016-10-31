@@ -22,14 +22,7 @@ ui <- dashboardPage(
                       solidHeader = TRUE, 
                       status="primary",
                       #wellPanel(textOutput("bookText"), style = "overflow-y:scroll; max-height: 500px")
-                      pre(textOutput("bookText"))
-                      # tags$div(class="header", checked=NA,
-                      #          tags$style("overflow-y:scroll; max-height: 500px"),
-                      #          tags$p(textOutput("bookText")),
-                      #          tags$a(href="shiny.rstudio.com/tutorial", "Click Here!")
-                    #)
-                    #box(textOutput("showText"), height=300, width="100%")
-                    #pre(includeText("Ben_Franklin_Autobiography_full_noTOC_noIntro.txt"))
+                      verbatimTextOutput("bookText") # Wrapper arount textOutput. Same as pre(texttOutput)
     )))
   ))))
 
@@ -48,7 +41,8 @@ ui <- dashboardPage(
       # The free version t1.micro instance has 1GB RAM limit. To avoid problems with memory
       # allocation when runnign the NLP, we can limit the analysis
       # to first 100 lines.
-      bfaRawText100 <- bfaRawText[1:100]
+      bfaRawText100 <- bfaRawText
+      #bfaRawText100 <- bfaRawText[1:100]
       htmltools:::paste8(bfaRawText100, collapse="\r\n")
       #pre(bfaRawText100)
       #bio <- as.String(bfaRawText790)
