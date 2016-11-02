@@ -21,15 +21,16 @@ ui <- dashboardPage(
                       width = "100%",
                       solidHeader = TRUE, 
                       status="primary",
-                      #wellPanel(textOutput("bookText"), style = "overflow-y:scroll; max-height: 500px")
-                      verbatimTextOutput("bookText") # Wrapper arount textOutput. Same as pre(texttOutput)
+                      wellPanel(pre(textOutput("bookText"), style = "overflow-y:scroll; max-height: 400px"))
+                      #verbatimTextOutput("bookText"), # Wrapper arount textOutput. Same as pre(texttOutput)
+                      #tags$head(tags$style("overflow-y:scroll;max-height: 500px"))
     )))
   ))))
 
   #TODO:
   # Make wellPanel scrollable - DONE 
   # Increase width of the box - DONE
-  # Format text such that carret returns are properly shown
+  # Format text such that carret returns are properly shown - DONE
   # Make textBox scrollable - 
   
   
