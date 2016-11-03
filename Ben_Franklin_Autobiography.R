@@ -1,9 +1,9 @@
-library(NLP)
+library(NLP) # 
 library(openNLP)
 library(RWeka)
 library(magrittr)
 
-# Learning from this NLP tutorial: https://rpubs.com/lmullen/nlp-chapter
+# Using his NLP tutorial: https://rpubs.com/lmullen/nlp-chapter
 # Sentiment analysis
 
 # BFA stands for Ben Franklin's Autobiography
