@@ -14,7 +14,7 @@ ui <- dashboardPage(
              valueBoxOutput("totalWordsValueBox"),
              valueBoxOutput("totalCharactersValueBox")
     ),
-    fluidRow(column(12,
+    fluidRow(column(8,
                     #box(plotOutput("showTextBox")),
                     box(
                       title="Autobiography of Benjamin Franklin",
@@ -22,16 +22,30 @@ ui <- dashboardPage(
                       solidHeader = TRUE, 
                       status="primary",
                       wellPanel(pre(textOutput("bookText"), style = "overflow-y:scroll; max-height: 400px"))
+                      )
+                    ),
+              column(4,
+                  box(title="Select text length", 
+                      width = "100%",
+                      solidHeader = TRUE, 
+                      status="primary",
+                      plotOutput("showDummyPlot")
+                      )
+              )
                       #verbatimTextOutput("bookText"), # Wrapper arount textOutput. Same as pre(texttOutput)
                       #tags$head(tags$style("overflow-y:scroll;max-height: 500px"))
-    )))
-  ))))
+    ))
+  )))
 
   #TODO:
   # Make wellPanel scrollable - DONE 
   # Increase width of the box - DONE
   # Format text such that carret returns are properly shown - DONE
-  # Make textBox scrollable - 
+  # Make textBox scrollable - DONE. Used wellPanel's style variable
+  # 
+  # Reactive function to compute number of characters, words, and sentences. \
+  #   Should be reactive on text length selectro
+  # 
   
   
   # Define server logic requimaroon to draw a histogram
@@ -63,17 +77,17 @@ ui <- dashboardPage(
       valueBox("500", "Number of Characters", icon=icon("th-list"), color="light-blue")
     })
     
-    # output$showTextBox <- renderPlot({
-    #   # generate bins based on input$bins from ui.R
-    #   x    <- faithful[, 2]
-    #   bins <- seq(min(x), max(x), length.out = 20 + 1)
-    #   
-    #   # draw the histogram with the specified number of bins
-    #   hist(x,
-    #        breaks = bins,
-    #        col = 'darkgray',
-    #        border = 'white')
-    # })
+    output$showDummyPlot <- renderPlot({
+      # generate bins based on input$bins from ui.R
+      x    <- faithful[, 2]
+      bins <- seq(min(x), max(x), length.out = 20 + 1)
+
+      # draw the histogram with the specified number of bins
+      hist(x,
+           breaks = bins,
+           col = 'darkgray',
+           border = 'white')
+    })
   })
   
   # Run the application
