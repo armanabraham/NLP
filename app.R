@@ -6,9 +6,9 @@ ui <- dashboardPage(
   title = "Naturale Lingo Processingo",
   dashboardHeader(title = "Sentiment Analysis"),
   dashboardSidebar(sidebarMenu(
-    menuItem("Show Text", tabName = "showText", icon = icon("dashboard")), 
-    sliderInput("textAmountSlider", label = "Text start and end (%)", min = 0, 
-                max = 100, value = c(0, 100))
+    menuItem("Text Content", tabName = "showText", icon = icon("dashboard"))
+    #sliderInput("textAmountSlider", label = "Text beginning and end (%)", min = 0, 
+    #            max = 100, value = c(0, 100))
   )),
   dashboardBody(tabItems(tabItem(
     tabName = "showText",
@@ -31,7 +31,9 @@ ui <- dashboardPage(
                       width = "100%",
                       solidHeader = TRUE, 
                       status="primary",
-                      plotOutput("showDummyPlot")
+                      #plotOutput("showDummyPlot"), 
+                      sliderInput("textAmountSlider", label = "Text beginning and end (%)", min = 0, 
+                                  max = 100, value = c(0, 100))
                       )
               )
                       #verbatimTextOutput("bookText"), # Wrapper arount textOutput. Same as pre(texttOutput)
