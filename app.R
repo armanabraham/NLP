@@ -6,7 +6,9 @@ ui <- dashboardPage(
   title = "Naturale Lingo Processingo",
   dashboardHeader(title = "Sentiment Analysis"),
   dashboardSidebar(sidebarMenu(
-    menuItem("Show Text", tabName = "showText", icon = icon("dashboard"))
+    menuItem("Show Text", tabName = "showText", icon = icon("dashboard")), 
+    sliderInput("textAmountSlider", label = "Text start and end (%)", min = 0, 
+                max = 100, value = c(0, 100))
   )),
   dashboardBody(tabItems(tabItem(
     tabName = "showText",
