@@ -33,7 +33,7 @@ ui <- dashboardPage(
                       status="primary",
                       #plotOutput("showDummyPlot"), 
                       sliderInput("textAmountSlider", label = "Text beginning and end (%)", min = 0, 
-                                  max = 100, value = c(0, 100)), 
+                                  max = 100, value = c(0, 10)), 
                       submitButton("  Go  ")
                       )
               )
