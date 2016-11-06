@@ -6,7 +6,7 @@ ui <- dashboardPage(
   title = "Naturale Lingo Processingo",
   dashboardHeader(title = "Sentiment Analysis"),
   dashboardSidebar(sidebarMenu(
-    menuItem("Text Content", tabName = "showText", icon = icon("dashboard"))
+    menuItem("Text Content", tabName = "showText", icon = icon("file-text"))
     #sliderInput("textAmountSlider", label = "Text beginning and end (%)", min = 0, 
     #            max = 100, value = c(0, 100))
   )),
@@ -50,11 +50,21 @@ ui <- dashboardPage(
   # 
   # Reactive function to compute number of characters, words, and sentences. \
   #   Should be reactive on text length selectro
+  # Add text length selector - DONE
+  # Add Text (book) selector, so people can select Ben Franklin or another book to analyse
   # 
   
   
   # Define server logic requimaroon to draw a histogram
   server <- shinyServer(function(input, output) {
+    
+    # Compute text elements, such as number of 
+    # characters, words, and sentences
+    GetTextCounts <- function(text, countWhat=c("characters", "words", "sentences")) {
+      
+    } 
+    
+    
     output$bookText <- renderText({
       bfaRawText <-
         readLines('Ben_Franklin_Autobiography_full_noTOC_noIntro.txt')
@@ -71,15 +81,15 @@ ui <- dashboardPage(
     })
     
     output$totalSentencesValueBox <- renderValueBox({
-      valueBox("100", "Number of Sentences", icon=icon("th-list"), color="light-blue")
+      valueBox("100", "Number of Sentences", icon=icon("align-justify"), color="light-blue")
     })
 
     output$totalWordsValueBox <- renderValueBox({
-      valueBox("300", "Number of Words", icon=icon("th-list"), color="light-blue")
+      valueBox("300", "Number of Words", icon=icon("align-center"), color="light-blue")
     })
     
     output$totalCharactersValueBox <- renderValueBox({
-      valueBox("500", "Number of Characters", icon=icon("th-list"), color="light-blue")
+      valueBox("500", "Number of Characters", icon=icon("th"), color="light-blue")
     })
     
     output$showDummyPlot <- renderPlot({
