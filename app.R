@@ -7,7 +7,7 @@ ui <- dashboardPage(
   dashboardHeader(title = "Sentiment Analysis"),
   dashboardSidebar(sidebarMenu(
     menuItem("Text Content", tabName = "showText", icon = icon("file-text"))
-    #sliderInput("textAmountSlider", label = "Text beginning and end (%)", min = 0, 
+    #sliderInput("textAmountSlider", label = "Text starting and ending lines (% lines)", min = 0, 
     #            max = 100, value = c(0, 100))
   )),
   dashboardBody(tabItems(tabItem(
@@ -32,7 +32,8 @@ ui <- dashboardPage(
                       solidHeader = TRUE, 
                       status="primary",
                       #plotOutput("showDummyPlot"), 
-                      sliderInput("textAmountSlider", label = "Text beginning and end (%)", min = 0, 
+                      selectizeInput("selectTextTitle", "Select text to analyze", choices="Autobiography"), 
+                      sliderInput("textAmountSlider", label = "Starting and ending line of text (%)", min = 0, 
                                   max = 100, value = c(0, 10)), 
                       submitButton("  Go  ")
                       )
@@ -58,6 +59,11 @@ ui <- dashboardPage(
   # Define server logic requimaroon to draw a histogram
   server <- shinyServer(function(input, output) {
     
+    ReadTextFile <- function(fileName) {
+      rawText <-
+        readLines(fileName)
+    }
+    
     # Compute text elements, such as number of 
     # characters, words, and sentences
     GetTextCounts <- function(text, countWhat=c("characters", "words", "sentences")) {
@@ -66,12 +72,12 @@ ui <- dashboardPage(
     
     
     output$bookText <- renderText({
-      bfaRawText <-
-        readLines('Ben_Franklin_Autobiography_full_noTOC_noIntro.txt')
+      # Read the book
+      theText <- ReadTextFile('Ben_Franklin_Autobiography_full_noTOC_noIntro.txt')
       # The free version t1.micro instance has 1GB RAM limit. To avoid problems with memory
       # allocation when runnign the NLP, we can limit the analysis
       # to first 100 lines.
-      bfaRawText100 <- bfaRawText
+      bfaRawText100 <- theText
       #bfaRawText100 <- bfaRawText[1:100]
       htmltools:::paste8(bfaRawText100, collapse="\r\n")
       #pre(bfaRawText100)
