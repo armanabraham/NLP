@@ -3,7 +3,9 @@ library(openNLP)
 library(RWeka)
 library(magrittr)
 
-# Using his NLP tutorial: https://rpubs.com/lmullen/nlp-chapter
+# Using this NLP tutorial: https://rpubs.com/lmullen/nlp-chapter
+# basics of NLP analysis: http://www.vikparuchuri.com/blog/natural-language-processing-tutorial/
+
 # Sentiment analysis
 
 # BFA stands for Ben Franklin's Autobiography
